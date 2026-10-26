@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#080b18">
+  <title>Blueisy — Temukan Tontonan Favoritmu</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="setupScreen" class="setup-screen">
+    <div class="setup-card">
+      <a class="brand" href="#"><span class="brand-mark">b</span>blueisy<span class="brand-dot">.</span></a>
+      <div class="setup-icon">✦</div>
+      <p class="eyebrow">WELCOME TO YOUR NEXT STORY</p>
+      <h1>Mulai petualangan<br><span>bersama Blueisy.</span></h1>
+      <p class="setup-copy">Hubungkan API TMDB kamu untuk menjelajahi drama Korea, drama China, anime Jepang, dan cartoon favorit.</p>
+      <form id="apiForm">
+        <label for="apiKey">TMDB API Key</label>
+        <div class="key-field">
+          <input id="apiKey" type="password" placeholder="Masukkan API key TMDB..." autocomplete="off" required>
+          <button id="toggleKey" type="button" aria-label="Tampilkan API key">Lihat</button>
+        </div>
+        <p class="field-help">Gunakan API key v3 dari akun TMDB kamu.</p>
+        <button class="btn primary full" id="connectBtn" type="submit">Hubungkan API <span>↗</span></button>
+        <p id="setupMessage" class="message" role="status"></p>
+      </form>
+      <p class="privacy-note">API key disimpan di penyimpanan lokal browser pada perangkat ini. Jangan masukkan key rahasia atau key yang tidak ingin terlihat di browser.</p>
+    </div>
+  </div>
+
+  <div id="appScreen" class="hidden">
+    <header class="topbar">
+      <a class="brand" href="#"><span class="brand-mark">b</span>blueisy<span class="brand-dot">.</span></a>
+      <nav><a class="active" href="#home">Beranda</a><a href="#discover">Jelajahi</a><a href="#trending">Trending</a></nav>
+      <form id="searchForm" class="search-box"><input id="searchInput" type="search" placeholder="Cari film atau serial..."><button type="submit">Cari</button></form>
+      <button id="changeApi" class="change-api" type="button" title="Ganti API key">API ⚙</button>
+    </header>
+    <main id="home">
+      <section class="hero">
+        <div id="heroBackdrop" class="hero-backdrop"></div>
+        <div class="hero-content">
+          <p class="eyebrow">✦ CERITA PILIHAN HARI INI</p>
+          <p id="heroKicker" class="hero-kicker">Your next comfort show is here.</p>
+          <h1>Temukan cerita<br><span>yang bikin jatuh hati.</span></h1>
+          <p class="hero-copy">Jelajahi drama Korea, drama China, anime Jepang, dan cartoon favoritmu dalam satu tempat.</p>
+          <div class="hero-actions"><button id="heroDetails" class="btn primary">Lihat detail ↗</button><a class="btn ghost" href="#discover">Jelajahi koleksi</a></div>
+          <div class="hero-meta">★ <span id="heroRating">Pilihan Blueisy</span> · <span id="heroYear">Update dari TMDB</span></div>
+        </div>
+      </section>
+      <section class="categories">
+        <button class="chip selected" data-category="all">✦ Semua</button>
+        <button class="chip" data-category="kdrama">♡ Drama Korea</button>
+        <button class="chip" data-category="cdrama">❀ Drama China</button>
+        <button class="chip" data-category="anime">✧ Anime Jepang</button>
+        <button class="chip" data-category="cartoon">☻ Cartoon</button>
+      </section>
+      <section id="discover" class="section">
+        <div class="section-head"><div><p class="eyebrow">PILIH SESUAI MOOD</p><h2>Jelajahi koleksi <span>Blueisy</span></h2></div>
+          <div class="filters"><select id="genreSelect"><option value="">Semua genre</option></select><select id="sortSelect"><option value="popularity.desc">Paling populer</option><option value="vote_average.desc">Rating tertinggi</option><option value="first_air_date.desc">Terbaru</option></select></div>
+        </div>
+        <div id="status" class="status">Hubungkan API untuk memuat koleksi.</div>
+        <div id="catalog" class="grid"></div>
+        <button id="loadMore" class="btn ghost load-more hidden">Muat lebih banyak ↓</button>
+      </section>
+      <section id="trending" class="section"><div class="section-head"><div><p class="eyebrow">LAGI BANYAK DICARI</p><h2>Trending <span>sekarang</span></h2></div></div><div id="trendingRow" class="grid trending-grid"></div></section>
+    </main>
+    <footer><a class="brand" href="#"><span class="brand-mark">b</span>blueisy<span class="brand-dot">.</span></a><p>Katalog penemuan tontonan yang memakai data TMDB. Blueisy tidak meng-host episode penuh.</p></footer>
+  </div>
+
+  <div id="detailModal" class="modal hidden" role="dialog" aria-modal="true">
+    <div class="modal-shade" data-close="1"></div>
+    <div class="modal-card"><button id="closeModal" class="close" aria-label="Tutup">×</button><div id="detailArt" class="detail-art"></div><div class="detail-body"><div id="detailTags" class="tags"></div><h2 id="detailTitle"></h2><p id="detailOverview"></p><div id="detailFacts" class="facts"></div><div id="trailerArea"></div></div></div>
+  </div>
+  <div id="toast" class="toast"></div>
+  <script src="app.js"></script>
+</body>
+</html>
